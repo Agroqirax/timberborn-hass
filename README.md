@@ -12,7 +12,9 @@ After installing HACS, go to
 
 Add:
 
-`https://github.com/agroqirax/timberborn-hass`
+```
+https://github.com/agroqirax/timberborn-hass
+```
 
 Select the type **Integration** and press **Add**.
 
