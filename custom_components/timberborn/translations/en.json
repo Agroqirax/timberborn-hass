@@ -1,0 +1,31 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Timberborn Instance",
+        "description": "Connect to a Timberborn game server running the HTTP mod.",
+        "data": {
+          "name": "Instance Name",
+          "host": "Host (e.g. http://localhost:8080)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the Timberborn server. Check host and ensure the mod is running.",
+      "unknown": "Unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This Timberborn instance is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Timberborn Options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    }
+  }
+}

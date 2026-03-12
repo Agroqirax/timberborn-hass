@@ -1,0 +1,12 @@
+{
+  "domain": "timberborn",
+  "name": "Timberborn",
+  "version": "1.0.0",
+  "documentation": "https://github.com/agroqirax/timberborn-hass",
+  "issue_tracker": "https://github.com/agroqirax/timberborn-hass/issues",
+  "requirements": ["timberborn-http"],
+  "dependencies": [],
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "codeowners": ["@agroqirax"]
+}
