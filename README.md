@@ -4,8 +4,10 @@ Connect homeassistant to the timberborn API.
 
 ## Installation
 
-This package is not currently on [hacs](hacs.xyz) or a custom repository so you'll need to install it manually.
-Download this repo and merge the custom_components folder with the custom_components folder in the config folder of homeassistant.
+The easiest way to install the integration is using [hacs](https://hacs.xyz/docs/use)
+Once you've installed hacs you can proceed here.
+Go to `Hacs (in the sidebar) > ... > Custom repositories`. There add `https://github.com/agroqirax/timberborn-hass`, select the type `Integration` and press `Add`.
+The integration is now installed.
 
 Since you're probably not running hass on the same computer as timberborn you'll need to install the **Remote Api Access** mod that allows all computers on the same network to access the api:
 
