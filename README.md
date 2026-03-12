@@ -1,35 +1,125 @@
-# Timberborn homeassistant
+# Timberborn Home Assistant
 
-Connect homeassistant to the timberborn API.
+Connect Home Assistant to the Timberborn API.
+This integration exposes Timberborn automation blocks (adapters and levers) to Home Assistant so they can be used in automations.
 
 ## Installation
 
-The easiest way to install the integration is using [hacs](https://hacs.xyz/docs/use)
-Once you've installed hacs you can proceed here.
-Go to `Hacs (in the sidebar) > ... > Custom repositories`. There add `https://github.com/agroqirax/timberborn-hass`, select the type `Integration` and press `Add`.
+The easiest way to install the integration is using [HACS](https://hacs.xyz/docs/use).
+
+After installing HACS, go to  
+`HACS (in the sidebar) > ... > Custom repositories`.
+
+Add:
+
+`https://github.com/agroqirax/timberborn-hass`
+
+Select the type **Integration** and press **Add**.
+
+Close the popup, search for **Timberborn**, select it, and press **Download**.  
 The integration is now installed.
 
-It is also possible to download this repo as a zip file and copy `custom_components/timberborn` from this repo into `custom_components` in the config folder of your hass install.
+Alternatively, download this repository as a zip file and copy  
+`custom_components/timberborn` from this repo into the `custom_components` folder in your Home Assistant config directory.
 
-Since you're probably not running hass on the same computer as timberborn you'll need to install the **Remote Api Access** mod that allows all computers on the same network to access the api:
+Since Home Assistant is usually not running on the same computer as Timberborn, you'll need to install the **Remote Api Access** mod. This mod allows other computers on the same network to access the API.
 
-- [Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3682669754)
+- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3682669754)
 - [Mod.io](https://mod.io/g/timberborn/m/remote-api-access)
-- [Github](https://github.com/agroqirax/remoteapiaccess/releases/latest)
+- [GitHub](https://github.com/agroqirax/remoteapiaccess/releases/latest)
 
 ## Configuration
 
-You'll need to find the IP address of the computer running timberborn. This can usually be found in the devices internet settings. Look for **IPv4 Address** in the format `192.168.x.xxx`.
-If you're running hass on the same computer you're running timberborn you can also use `localhost` or `127.0.0.1`.
+Find the IP address of the computer running Timberborn.  
+This can usually be found in the device's network settings.
 
-Then go to `Settings > Devices & services > Add integration > Timberborn` and enter the base url of the timberborn API.
+Look for **IPv4 Address** in the format:
 
-The base url should be in the format `http://host:Port`.
-Host is the IP address of the computer running timberborn.
-Port is the port number configured in timberborn, default is 8080
+```
+192.168.x.xxx
+```
 
-You may add multiple instances of timberborn.
+If Home Assistant is running on the same computer as Timberborn, you can also use:
+
+```
+localhost
+```
+
+or
+
+```
+127.0.0.1
+```
+
+Then go to:
+
+```
+Settings > Devices & Services > Add Integration > Timberborn
+```
+
+Enter the base URL of the Timberborn API.
+
+The base URL should be in the format:
+
+```
+http://host:port
+```
+
+Example:
+
+```
+http://192.168.1.42:8080
+```
+
+- **Host** = IP address of the computer running Timberborn
+- **Port** = Port configured in Timberborn (default: `8080`)
+
+Multiple Timberborn instances can be added.
 
 ## Usage
 
-Adapters are binary sensors & levers are rgb lights that can be switched on/off as well as have their color set. The brightness setting currently doesn't do anything.
+Adapters appear as **binary sensors**.
+
+Levers appear as **RGB lights** that can be turned on/off and have their color set.  
+The brightness setting currently has no effect.
+
+## Webhooks
+
+This integration only uses the API for polling.  
+To receive instant updates you can create a webhook automation like this:
+
+```yaml
+alias: Timberborn webhook
+description: Notify user when adapter state changes
+triggers:
+  - trigger: webhook
+    allowed_methods:
+      - GET
+      - POST
+      - PUT
+    local_only: false
+    webhook_id: timberborn
+conditions: []
+actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      message: "{{trigger.query.name}} turned {{trigger.query.state}}"
+mode: single
+```
+
+Then set the adapter webhook URL to something like:
+
+```
+http://homeassistant.local:8123/api/webhook/timberborn?name={name}&state=on
+```
+
+For the **off** URL use:
+
+```
+&state=off
+```
+
+`{name}` is replaced by the game with the adapter name before the request is sent.
+
+Make sure to enable **"Call when switched on"** and **"Call when switched off"**, otherwise the webhook will not be triggered.
