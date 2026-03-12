@@ -20,6 +20,7 @@ Since you're probably not running hass on the same computer as timberborn you'll
 ## Configuration
 
 You'll need to find the IP address of the computer running timberborn. This can usually be found in the devices internet settings. Look for **IPv4 Address** in the format `192.168.x.xxx`.
+If you're running hass on the same computer you're running timberborn you can also use `localhost` or `127.0.0.1`.
 
 Then go to `Settings > Devices & services > Add integration > Timberborn` and enter the base url of the timberborn API.
 
