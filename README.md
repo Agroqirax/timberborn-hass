@@ -9,6 +9,8 @@ Once you've installed hacs you can proceed here.
 Go to `Hacs (in the sidebar) > ... > Custom repositories`. There add `https://github.com/agroqirax/timberborn-hass`, select the type `Integration` and press `Add`.
 The integration is now installed.
 
+It is also possible to download this repo as a zip file and copy `custom_components/timberborn` from this repo into `custom_components` in the config folder of your hass install.
+
 Since you're probably not running hass on the same computer as timberborn you'll need to install the **Remote Api Access** mod that allows all computers on the same network to access the api:
 
 - [Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3682669754)
