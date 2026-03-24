@@ -9,6 +9,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_NAME
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 
 from .const import (
     DOMAIN,
@@ -80,6 +81,50 @@ class TimberbornConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     ) -> TimberbornOptionsFlow:
         """Return the options flow."""
         return TimberbornOptionsFlow(config_entry)
+
+    async def async_step_zeroconf(
+        self, discovery_info: ZeroconfServiceInfo
+    ) -> config_entries.ConfigFlowResult:
+        """Handle zeroconf discovery."""
+        host_ip = (
+            discovery_info.ip_address  # preferred in newer HA
+            or discovery_info.host
+        )
+        host = f"http://{host_ip}:{discovery_info.port}"
+
+        await self.async_set_unique_id(host)
+        self._abort_if_unique_id_configured()
+
+        # Store for use in the confirmation form
+        self._discovered_host = host
+
+        try:
+            await validate_host(self.hass, host)
+        except Exception:
+            return self.async_abort(reason="cannot_connect")
+
+        return await self.async_step_zeroconf_confirm()
+
+    async def async_step_zeroconf_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> config_entries.ConfigFlowResult:
+        """Confirm zeroconf discovery."""
+        if user_input is not None:
+            return self.async_create_entry(
+                title=user_input[CONF_NAME],
+                data={
+                    CONF_HOST: self._discovered_host,
+                    CONF_NAME: user_input[CONF_NAME],
+                },
+            )
+
+        return self.async_show_form(
+            step_id="zeroconf_confirm",
+            data_schema=vol.Schema(
+                {vol.Required(CONF_NAME, default=DEFAULT_NAME): str}
+            ),
+            description_placeholders={"host": self._discovered_host},
+        )
 
 
 class TimberbornOptionsFlow(config_entries.OptionsFlow):

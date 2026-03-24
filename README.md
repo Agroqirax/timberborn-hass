@@ -32,6 +32,21 @@ Since Home Assistant is usually not running on the same computer as Timberborn, 
 
 ## Configuration
 
+### Automatically
+
+Go to:
+
+```
+Settings > Devices & Services
+```
+
+Hass should automatically discover timberborn.
+Just click add, name it and press submit.
+
+For this you need timberborn-hass version 1.1.0 and Remote Api Access version 1.0.12.6.
+
+### Manually
+
 Find the IP address of the computer running Timberborn.  
 This can usually be found in the device's network settings.
 
@@ -41,17 +56,7 @@ Look for **IPv4 Address** in the format:
 192.168.x.xxx
 ```
 
-If Home Assistant is running on the same computer as Timberborn, you can also use:
-
-```
-localhost
-```
-
-or
-
-```
-127.0.0.1
-```
+If Home Assistant is running on the same computer as Timberborn, you can also use `localhost` or `127.0.0.1`.
 
 Then go to:
 

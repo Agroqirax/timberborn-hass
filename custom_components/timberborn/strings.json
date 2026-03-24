@@ -8,6 +8,13 @@
           "name": "Instance Name",
           "host": "Host (e.g. http://localhost:8080)"
         }
+      },
+      "zeroconf_confirm": {
+        "title": "Timberborn discovered",
+        "description": "Found Timberborn at {host}. What would you like to name this instance?",
+        "data": {
+          "name": "Name"
+        }
       }
     },
     "error": {
