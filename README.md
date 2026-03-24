@@ -30,6 +30,14 @@ Since Home Assistant is usually not running on the same computer as Timberborn, 
 - [Mod.io](https://mod.io/g/timberborn/m/remote-api-access)
 - [GitHub](https://github.com/agroqirax/remoteapiaccess/releases/latest)
 
+## Prerequisites
+
+Homeassistant must be on the same network as the computer running Timberborn.
+
+While configuring the integration Timberborn must be running, in a save and the API must be started.
+
+When you close Timberborn homeassistant will lose the connection and all entities switch to unavailable. When you start the game back up hass will retry and the entities will become available again.
+
 ## Configuration
 
 ### Automatically
