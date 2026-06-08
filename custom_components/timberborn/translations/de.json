@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Timberborn-Instanz hinzufügen",
+        "description": "Verbinde dich mit einem Timberborn-Spielserver, auf dem der HTTP-Mod läuft.",
+        "data": {
+          "name": "Instanzname",
+          "host": "Host (z. B. http://localhost:8080)"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Timberborn gefunden",
+        "description": "Timberborn unter {host} gefunden. Wie möchtest du diese Instanz nennen?",
+        "data": {
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum Timberborn-Server nicht möglich. Überprüfe den Host und stelle sicher, dass der Mod läuft.",
+      "unknown": "Es ist ein unerwarteter Fehler aufgetreten."
+    },
+    "abort": {
+      "already_configured": "Diese Timberborn-Instanz ist bereits konfiguriert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Timberborn-Optionen",
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)"
+        }
+      }
+    }
+  }
+}

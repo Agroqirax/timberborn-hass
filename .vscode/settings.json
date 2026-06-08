@@ -1,1 +1,8 @@
-{}
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["hacs.json"],
+      "url": "https://gist.githubusercontent.com/MrBartusek/2d4ecd1c86f58326260d899afbda08be/raw/94cf4273b20b14ac76b6ad8081e26ae756e91204/hacs-schema.json"
+    }
+  ]
+}

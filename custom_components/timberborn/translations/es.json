@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Añadir instancia de Timberborn",
+        "description": "Conéctate a un servidor del juego Timberborn que ejecute el mod HTTP.",
+        "data": {
+          "name": "Nombre de la instancia",
+          "host": "Host (p. ej., http://localhost:8080)"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Timberborn detectado",
+        "description": "Se ha encontrado Timberborn en {host}. ¿Cómo quieres llamar a esta instancia?",
+        "data": {
+          "name": "Nombre"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No se puede conectar al servidor de Timberborn. Comprueba el host y asegúrate de que el mod se está ejecutando.",
+      "unknown": "Se ha producido un error inesperado."
+    },
+    "abort": {
+      "already_configured": "Esta instancia de Timberborn ya está configurada."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opciones de Timberborn",
+        "data": {
+          "scan_interval": "Intervalo de sondeo (segundos)"
+        }
+      }
+    }
+  }
+}

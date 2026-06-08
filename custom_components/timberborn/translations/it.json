@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Aggiungi un'istanza Timberborn",
+        "description": "Connettiti a un server di gioco Timberborn su cui è in esecuzione la mod HTTP.",
+        "data": {
+          "name": "Nome istanza",
+          "host": "Host (ad es. http://localhost:8080)"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Timberborn rilevato",
+        "description": "Timberborn trovato su {host}. Come vuoi chiamare questa istanza?",
+        "data": {
+          "name": "Nome"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi al server Timberborn. Controlla l'host e assicurati che la mod sia in esecuzione.",
+      "unknown": "Si è verificato un errore imprevisto."
+    },
+    "abort": {
+      "already_configured": "Questa istanza di Timberborn è già configurata."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni Timberborn",
+        "data": {
+          "scan_interval": "Intervallo di polling (secondi)"
+        }
+      }
+    }
+  }
+}

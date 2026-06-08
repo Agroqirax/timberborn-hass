@@ -7,7 +7,7 @@ This integration exposes Timberborn automation blocks (adapters and levers) to H
 
 The easiest way to install the integration is using [HACS](https://hacs.xyz/docs/use).
 
-After installing HACS, go to  
+After installing HACS, go to
 `HACS (in the sidebar) > ... > Custom repositories`.
 
 Add:
@@ -18,11 +18,10 @@ https://github.com/agroqirax/timberborn-hass
 
 Select the type **Integration** and press **Add**.
 
-Close the popup, search for **Timberborn**, select it, and press **Download**.  
+Close the popup, search for **Timberborn**, select it, and press **Download**.
 The integration is now installed.
 
-Alternatively, download this repository as a zip file and copy  
-`custom_components/timberborn` from this repo into the `custom_components` folder in your Home Assistant config directory.
+Alternatively, download this repository as a [zip file](https://github.com/agroqirax/timberborn-http/archive/refs/heads/main.zip) and merge the `custom_components` folder in this repo with the one in your Home Assistant config directory.
 
 Since Home Assistant is usually not running on the same computer as Timberborn, you'll need to install the **Remote Api Access** mod. This mod allows other computers on the same network to access the API.
 
@@ -36,7 +35,7 @@ Homeassistant must be on the same network as the computer running Timberborn.
 
 While configuring the integration Timberborn must be running, in a save and the API must be started.
 
-When you close Timberborn homeassistant will lose the connection and all entities switch to unavailable. When you start the game back up hass will retry and the entities will become available again.
+When you close Timberborn homeassistant will lose the connection and all entities switch to unavailable. Once you start the game back up hass will reconnect and the entities will become available again.
 
 ## Configuration
 
@@ -51,13 +50,15 @@ Settings > Devices & Services
 Hass should automatically discover timberborn.
 Just click add, name it and press submit.
 
-For this you need timberborn-hass version 1.1.0 and Remote Api Access version 1.0.12.6.
+For this you need timberborn-hass version `1.1.0` and Remote Api Access version `1.0.13.0`.
 
 ### Manually
 
-Find the IP address of the computer running Timberborn.  
-This can usually be found in the device's network settings.
+Find the IP address of the computer running Timberborn.
 
+The mod shows the IP address in the turn on/turn off URL of the HTTP adapter/lever.
+
+Alternatively it can usually be found in the device's network settings.
 Look for **IPv4 Address** in the format:
 
 ```
@@ -80,14 +81,14 @@ The base URL should be in the format:
 http://host:port
 ```
 
+**Host**: IP address of the computer running Timberborn
+**Port**: Port configured in Timberborn (default: `8080`)
+
 Example:
 
 ```
-http://192.168.1.42:8080
+http://192.168.x.xxx:8080
 ```
-
-- **Host** = IP address of the computer running Timberborn
-- **Port** = Port configured in Timberborn (default: `8080`)
 
 Multiple Timberborn instances can be added.
 
@@ -95,12 +96,12 @@ Multiple Timberborn instances can be added.
 
 Adapters appear as **binary sensors**.
 
-Levers appear as **RGB lights** that can be turned on/off and have their color set.  
+Levers appear as **RGB lights** that can be turned on/off and have their color set.
 The brightness setting currently has no effect.
 
 ## Webhooks
 
-This integration only uses the API for polling.  
+This integration only uses the API for polling.
 To receive instant updates you can create a webhook automation like this:
 
 ```yaml
@@ -123,13 +124,13 @@ actions:
 mode: single
 ```
 
-Then set the adapter webhook URL to something like:
+Then set the adapter webhook URL to:
 
 ```
 http://homeassistant.local:8123/api/webhook/timberborn?name={name}&state=on
 ```
 
-For the **off** URL use:
+For the off URL use:
 
 ```
 &state=off
@@ -137,4 +138,4 @@ For the **off** URL use:
 
 `{name}` is replaced by the game with the adapter name before the request is sent.
 
-Make sure to enable **"Call when switched on"** and **"Call when switched off"**, otherwise the webhook will not be triggered.
+Make sure to tick **Call when switched on/off**, otherwise the webhook will not be triggered.

@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Timberborn-instantie toevoegen",
+        "description": "Maak verbinding met een Timberborn-spelserver waarop de HTTP-mod draait.",
+        "data": {
+          "name": "Instance Name",
+          "host": "Host (bijv. http://localhost:8080)"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Timberborn gevonden",
+        "description": "Timberborn gevonden op {host}. Hoe wil je deze instantie noemen?",
+        "data": {
+          "name": "Naam"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met de Timberborn-server. Controleer de host en zorg ervoor dat de mod draait.",
+      "unknown": "Er is een onverwachte fout opgetreden."
+    },
+    "abort": {
+      "already_configured": "Deze Timberborn-instantie is al geconfigureerd."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Timberborn-opties",
+        "data": {
+          "scan_interval": "Pollinginterval (seconden)"
+        }
+      }
+    }
+  }
+}
