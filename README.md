@@ -7,21 +7,14 @@ This integration exposes Timberborn automation blocks (adapters and levers) to H
 
 The easiest way to install the integration is using [HACS](https://hacs.xyz/docs/use).
 
-After installing HACS, go to
-`HACS (in the sidebar) > ... > Custom repositories`.
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=agroqirax&repository=timberborn-hass&category=integration)
 
-Add:
+_(Alternatively: Open HACS, click ⋮, select "custom repositories", enter `https://github.com/agroqirax/timberborn-hass`, select type "Integration", press add)_
 
-```
-https://github.com/agroqirax/timberborn-hass
-```
-
-Select the type **Integration** and press **Add**.
-
-Close the popup, search for **Timberborn**, select it, and press **Download**.
+Search for **Timberborn** and press **Download**.
 The integration is now installed.
 
-Alternatively, download this repository as a [zip file](https://github.com/agroqirax/timberborn-http/archive/refs/heads/main.zip) and merge the `custom_components` folder in this repo with the one in your Home Assistant config directory.
+Alternatively, download this repository as a [zip file](https://github.com/agroqirax/timberborn-hass/archive/refs/heads/main.zip) and merge the `custom_components` folder in this repo with the one in your Home Assistant config directory.
 
 Since Home Assistant is usually not running on the same computer as Timberborn, you'll need to install the **Remote Api Access** mod. This mod allows other computers on the same network to access the API.
 
@@ -50,7 +43,7 @@ Settings > Devices & Services
 Hass should automatically discover timberborn.
 Just click add, name it and press submit.
 
-For this you need timberborn-hass version `1.1.0` and Remote Api Access version `1.0.13.0`.
+For this you need timberborn-hass version `>=1.1.0` and Remote Api Access version `>=1.0.13.0`.
 
 ### Manually
 
@@ -59,11 +52,7 @@ Find the IP address of the computer running Timberborn.
 The mod shows the IP address in the turn on/turn off URL of the HTTP adapter/lever.
 
 Alternatively it can usually be found in the device's network settings.
-Look for **IPv4 Address** in the format:
-
-```
-192.168.x.xxx
-```
+Look for **IPv4 Address** in the format `192.168.x.xxx`.
 
 If Home Assistant is running on the same computer as Timberborn, you can also use `localhost` or `127.0.0.1`.
 
