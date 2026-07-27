@@ -10,6 +10,7 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_NAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
+from ipaddress import IPv4Address, IPv6Address
 
 from .const import (
     DOMAIN,
@@ -86,21 +87,29 @@ class TimberbornConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self, discovery_info: ZeroconfServiceInfo
     ) -> config_entries.ConfigFlowResult:
         """Handle zeroconf discovery."""
-        host_ip = (
-            discovery_info.ip_address  # preferred in newer HA
-            or discovery_info.host
+        # Prefer an IPv4 address if one was announced
+        ipv4 = next(
+            (a for a in discovery_info.ip_addresses if isinstance(a, IPv4Address)),
+            None,
         )
-        host = f"http://{host_ip}:{discovery_info.port}"
+        host_ip = ipv4 or discovery_info.ip_address or discovery_info.host
+
+        if isinstance(host_ip, IPv6Address):
+            host = f"http://[{host_ip}]:{discovery_info.port}"
+        else:
+            host = f"http://{host_ip}:{discovery_info.port}"
 
         await self.async_set_unique_id(host)
         self._abort_if_unique_id_configured()
 
-        # Store for use in the confirmation form
         self._discovered_host = host
 
         try:
             await validate_host(self.hass, host)
         except Exception:
+            _LOGGER.exception(
+                "Error connecting to discovered Timberborn at %s", host
+            )
             return self.async_abort(reason="cannot_connect")
 
         return await self.async_step_zeroconf_confirm()
